@@ -1,109 +1,88 @@
-# Slug URL Variables
+# URL-Safe Slug Variables Reference
 
-## Table of Contents
+This document details the URL-safe versions of slug variables provided by GitHub Slug Action. These variables are specially formatted for use in URLs and paths, with proper percent-encoding of special characters.
 
-- [Slug URL Variables](#slug-url-variables)
-  - [Table of Contents](#table-of-contents)
-  - [GITHUB_REPOSITORY_SLUG_URL](#github_repository_slug_url)
-  - [GITHUB_REPOSITORY_OWNER_PART_SLUG_URL](#github_repository_owner_part_slug_url)
-  - [GITHUB_REPOSITORY_NAME_PART_SLUG_URL](#github_repository_name_part_slug_url)
-  - [GITHUB_REF_SLUG_URL](#github_ref_slug_url)
-  - [GITHUB_HEAD_REF_SLUG_URL](#github_head_ref_slug_url)
-  - [GITHUB_BASE_REF_SLUG_URL](#github_base_ref_slug_url)
-  - [GITHUB_EVENT_REF_SLUG_URL](#github_event_ref_slug_url)
+## Repository URL Variables
 
-## GITHUB_REPOSITORY_SLUG_URL
+### GITHUB_REPOSITORY_SLUG_URL
 
-Slug URL the environment variable **GITHUB_REPOSITORY**
+URL-safe version of repository name, combining owner and repository
 
-The owner and repository name.
+```yaml
+# Examples
+GITHUB_REPOSITORY: "octocat/Hello-World"
+→ GITHUB_REPOSITORY_SLUG_URL: "octocat-hello-world"
 
-| GITHUB_REPOSITORY            | GITHUB_REPOSITORY_SLUG_URL   |
-| ---------------------------- | ---------------------------- |
-| octocat/Hello-World          | octocat-hello-world          |
-| rlespinasse/Hello-World.go   | rlespinasse-hello-world-go   |
-| AnotherPerson/SomeRepository | anotherperson-somerepository |
+GITHUB_REPOSITORY: "rlespinasse/Hello-World.go"
+→ GITHUB_REPOSITORY_SLUG_URL: "rlespinasse-hello-world-go"
+```
 
-## GITHUB_REPOSITORY_OWNER_PART_SLUG_URL
+### Repository Part Variables
 
-Slug URL the environment variable [GITHUB_REPOSITORY_OWNER_PART](partial-variables.md#github_repository_owner_part)
+#### Owner and Name Components
 
-The Owner part of **GITHUB_REPOSITORY** variable.
+- **GITHUB_REPOSITORY_OWNER_PART_SLUG_URL**: URL-safe owner name
+- **GITHUB_REPOSITORY_NAME_PART_SLUG_URL**: URL-safe repository name
 
-| GITHUB_REPOSITORY_OWNER_PART | GITHUB_REPOSITORY_OWNER_PART_SLUG_URL |
-| ---------------------------- | ------------------------------------- |
-| octocat                      | octocat                               |
-| rlespinasse                  | rlespinasse                           |
-| AnotherPerson                | anotherperson                         |
+```yaml
+# Example
+GITHUB_REPOSITORY: "AnotherPerson/Some.Repository"
+GITHUB_REPOSITORY_OWNER_PART_SLUG_URL: "anotherperson"
+GITHUB_REPOSITORY_NAME_PART_SLUG_URL: "some-repository"
+```
 
-## GITHUB_REPOSITORY_NAME_PART_SLUG_URL
+## Reference URL Variables
 
-Slug URL the environment variable [GITHUB_REPOSITORY_NAME_PART](partial-variables.md#github_repository_name_part)
+### GITHUB_REF_SLUG_URL
 
-The Repository name part of **GITHUB_REPOSITORY** variable.
+URL-safe version of the triggering reference
 
-| GITHUB_REPOSITORY_NAME_PART | GITHUB_REPOSITORY_NAME_PART_SLUG_URL |
-| --------------------------- | ------------------------------------ |
-| Hello-World                 | hello-world                          |
-| Hello-World.go              | hello-world-go                       |
-| SomeRepository              | somerepository                       |
+```yaml
+# Examples
+GITHUB_REF: "refs/heads/feat/new_feature"
+→ GITHUB_REF_SLUG_URL: "feat-new-feature"
 
-## GITHUB_REF_SLUG_URL
+GITHUB_REF: "refs/tags/v1.0.0"
+→ GITHUB_REF_SLUG_URL: "v1-0-0"
 
-Slug URL the environment variable **GITHUB_REF**
+GITHUB_REF: "refs/pull/42-merge"
+→ GITHUB_REF_SLUG_URL: "42-merge"
+```
 
-The branch or tag ref that triggered the workflow.
-_If neither a branch or tag is available for the event type, the variable will not exist._
+> **Note**: Version 3.3.0 fixed incorrect handling of pull request references (previously `refs-pull-42-merge` instead of `42-merge` in v3.0.0-v3.2.0)
 
-| GITHUB_REF                     | GITHUB_REF_SLUG_URL |
-| ------------------------------ | ------------------- |
-| refs/heads/main                | main                |
-| refs/heads/feat/new_feature    | feat-new-feature    |
-| refs/tags/v1.0.0               | v1-0-0              |
-| refs/pull/42-merge             | 42-merge            |
-| refs/tags/product@1.0.0-rc.2   | product-1-0-0-rc-2  |
-| refs/heads/New_Awesome_Product | new-awesome-product |
+### Pull Request Reference Variables
 
-**Caution**: From v3.0.0 to v3.2.0 included, `GITHUB_REF_SLUG` have the wrong value on `pull_request` event.
-`refs/pull/42-merge` become `refs-pull-42-merge` instead of `42-merge`. The bug have been fixed in v3.3.0
+Available during pull request events:
 
-## GITHUB_HEAD_REF_SLUG_URL
+- **GITHUB_HEAD_REF_SLUG_URL**: URL-safe source branch name
+- **GITHUB_BASE_REF_SLUG_URL**: URL-safe target branch name
 
-Slug URL the environment variable **GITHUB_HEAD_REF**
+```yaml
+# Example
+GITHUB_HEAD_REF: "feat/new_feature"
+→ GITHUB_HEAD_REF_SLUG_URL: "feat-new-feature"
+```
 
-The branch of the head repository.
-_Only set for forked repositories._
+### GITHUB_EVENT_REF_SLUG_URL
 
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG_URL |
-| ------------------------------ | ------------------------ |
-| refs/heads/main                | main                     |
-| refs/heads/feat/new_feature    | feat-new-feature         |
-| refs/heads/New_Awesome_Product | new-awesome-product      |
+Available during `create` and `delete` events, provides URL-safe reference name
 
-## GITHUB_BASE_REF_SLUG_URL
+```yaml
+# Example
+github.event.ref: "refs/heads/New_Awesome_Product"
+→ GITHUB_EVENT_REF_SLUG_URL: "new-awesome-product"
+```
 
-Slug URL the environment variable **GITHUB_BASE_REF**
+## URL-Safe Formatting Rules
 
-The branch of the base repository.
-_Only set for forked repositories._
+- Converts to lowercase
+- Replaces special characters with hyphens
+- Encodes remaining special characters using percent-encoding
+- Removes leading/trailing special characters
+- Converts periods to hyphens (unlike regular slug variables)
 
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG_URL |
-| ------------------------------ | ------------------------ |
-| refs/heads/main                | main                     |
-| refs/heads/feat/new_feature    | feat-new-feature         |
-| refs/heads/New_Awesome_Product | new-awesome-product      |
+## Related Documentation
 
-## GITHUB_EVENT_REF_SLUG_URL
-
-Slug URL the variable **github.event.ref**
-
-The git reference resource associated to triggered webhook.
-_Only set for [`create`, and `delete`][1] events._
-
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG_URL |
-| ------------------------------ | ------------------------ |
-| refs/heads/main                | main                     |
-| refs/heads/feat/new_feature    | feat-new-feature         |
-| refs/heads/New_Awesome_Product | new-awesome-product      |
-
-[1]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads
+- [GitHub Events Documentation](https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads)
+- [Partial Variables Reference](partial-variables.md)

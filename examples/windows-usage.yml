@@ -1,34 +1,42 @@
-name: Windows usage
+name: Windows Usage Example
 
 on: push
 
 jobs:
-  usage:
+  display_variables:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: rlespinasse/github-slug-action@v5
-      - name: Output
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Enhanced GitHub environment variables
+        uses: rlespinasse/github-slug-action@v5
+
+      - name: Display environment variables
+        shell: pwsh
         run: |
-          echo "Partial variables"
-          echo "   repository owner    : $env:GITHUB_REPOSITORY_OWNER_PART"
-          echo "   repository name     : $env:GITHUB_REPOSITORY_NAME_PART"
-          echo "Slug variables"
-          echo "   repository          : $env:GITHUB_REPOSITORY_SLUG"
-          echo "   repository owner    : $env:GITHUB_REPOSITORY_OWNER_PART_SLUG"
-          echo "   repository name     : $env:GITHUB_REPOSITORY_NAME_PART_SLUG"
-          echo "   ref                 : $env:GITHUB_REF_SLUG"
-          echo "   head ref            : $env:GITHUB_HEAD_REF_SLUG"
-          echo "   base ref            : $env:GITHUB_BASE_REF_SLUG"
-          echo "   event ref           : $env:GITHUB_EVENT_REF_SLUG"
-          echo "Slug URL variables"
-          echo "   repository          : $env:GITHUB_REPOSITORY_SLUG_URL"
-          echo "   repository owner    : $env:GITHUB_REPOSITORY_OWNER_PART_SLUG_URL"
-          echo "   repository name     : $env:GITHUB_REPOSITORY_NAME_PART_SLUG_URL"
-          echo "   ref                 : $env:GITHUB_REF_SLUG_URL"
-          echo "   head ref            : $env:GITHUB_HEAD_REF_SLUG_URL"
-          echo "   base ref            : $env:GITHUB_BASE_REF_SLUG_URL"
-          echo "   event ref           : $env:GITHUB_EVENT_REF_SLUG_URL"
-          echo "Short SHA variables"
-          echo "   sha                 : $env:GITHUB_SHA_SHORT"
-          echo "   pull request sha    : $env:GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT"
+          Write-Host "=== Repository Part Variables ==="
+          Write-Host "Owner     : $env:GITHUB_REPOSITORY_OWNER_PART"
+          Write-Host "Name      : $env:GITHUB_REPOSITORY_NAME_PART"
+
+          Write-Host "`n=== Slug Variables ==="
+          Write-Host "Repository: $env:GITHUB_REPOSITORY_SLUG"
+          Write-Host "Owner     : $env:GITHUB_REPOSITORY_OWNER_PART_SLUG"
+          Write-Host "Name      : $env:GITHUB_REPOSITORY_NAME_PART_SLUG"
+          Write-Host "Ref       : $env:GITHUB_REF_SLUG"
+          Write-Host "Head Ref  : $env:GITHUB_HEAD_REF_SLUG"
+          Write-Host "Base Ref  : $env:GITHUB_BASE_REF_SLUG"
+          Write-Host "Event Ref : $env:GITHUB_EVENT_REF_SLUG"
+
+          Write-Host "`n=== URL-Safe Slug Variables ==="
+          Write-Host "Repository: $env:GITHUB_REPOSITORY_SLUG_URL"
+          Write-Host "Owner     : $env:GITHUB_REPOSITORY_OWNER_PART_SLUG_URL"
+          Write-Host "Name      : $env:GITHUB_REPOSITORY_NAME_PART_SLUG_URL"
+          Write-Host "Ref       : $env:GITHUB_REF_SLUG_URL"
+          Write-Host "Head Ref  : $env:GITHUB_HEAD_REF_SLUG_URL"
+          Write-Host "Base Ref  : $env:GITHUB_BASE_REF_SLUG_URL"
+          Write-Host "Event Ref : $env:GITHUB_EVENT_REF_SLUG_URL"
+
+          Write-Host "`n=== Short SHA Variables ==="
+          Write-Host "SHA          : $env:GITHUB_SHA_SHORT"
+          Write-Host "Pull Request : $env:GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT"

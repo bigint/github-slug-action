@@ -1,96 +1,64 @@
-# Available GitHub Variables
+# GitHub Variables Reference
 
-All `GitHub` variables availables in your workflow in addition of ones exposed by this Action
+This document outlines the GitHub variables available in your workflows, including those provided by GitHub Slug Action.
 
-## Table of Contents
+## Default Environment Variables
 
-- [Available GitHub Variables](#available-github-variables)
-  - [Table of Contents](#table-of-contents)
-  - [Default environment variables](#default-environment-variables)
-    - [Action-managed Environment Variables](#action-managed-environment-variables)
-  - [Variables from events](#variables-from-events)
-    - [Action-managed Event Variables](#action-managed-event-variables)
-      - [create](#create)
-      - [delete](#delete)
-      - [pull_request](#pull_request)
-      - [pull_request_review](#pull_request_review)
-      - [pull_request_review_comment](#pull_request_review_comment)
-      - [pull_request_target](#pull_request_target)
+For a complete list of default variables, see the [GitHub Actions Environment Variables documentation][1].
 
-## Default environment variables
+### Action-Enhanced Variables
 
-Read the official documentation about [Default environment variables][1].
+The following default GitHub variables can be enhanced with additional formats:
 
-### Action-managed Environment Variables
+| Base Variable     | Available Enhancements |
+| ----------------- | ---------------------- |
+| GITHUB_REPOSITORY | `_SLUG`, `_SLUG_URL`   |
+| GITHUB_REF        | `_SLUG`, `_SLUG_URL`   |
+| GITHUB_HEAD_REF   | `_SLUG`, `_SLUG_URL`   |
+| GITHUB_BASE_REF   | `_SLUG`, `_SLUG_URL`   |
+| GITHUB_SHA        | `_SHORT`               |
 
-| Action-managed Variables | Can be suffix by     |
-| ------------------------ | -------------------- |
-| GITHUB_REPOSITORY        | `_SLUG`, `_SLUG_URL` |
-| GITHUB_REF               | `_SLUG`, `_SLUG_URL` |
-| GITHUB_HEAD_REF          | `_SLUG`, `_SLUG_URL` |
-| GITHUB_BASE_REF          | `_SLUG`, `_SLUG_URL` |
-| GITHUB_SHA               | `_SHORT`             |
+Example:
 
-## Variables from events
+```yaml
+# Original: refs/heads/feature/new.branch
+${{ env.GITHUB_REF_SLUG }}     # feature-new.branch
+${{ env.GITHUB_REF_SLUG_URL }} # feature-new-branch
+```
 
-Read the official documentation about [Events that trigger workflows][2].
+## Event-Specific Variables
 
-### Action-managed Event Variables
+Additional variables are available based on the triggering event. See [Events that trigger workflows][2] for details.
 
-#### create
+### Available Event Variables
 
-Checkout [create][3] webhook payload content
+#### Create and Delete Events
 
-| Action-managed Variables | Available as              |
-| ------------------------ | ------------------------- |
-| github.event.ref         | GITHUB_EVENT_REF_SLUG     |
-| github.event.ref         | GITHUB_EVENT_REF_SLUG_URL |
+Reference: [Create][3] and [Delete][4] webhook payloads
 
-#### delete
+| Event Variable   | Enhanced Format                                      |
+| ---------------- | ---------------------------------------------------- |
+| github.event.ref | `GITHUB_EVENT_REF_SLUG`, `GITHUB_EVENT_REF_SLUG_URL` |
 
-Checkout [delete][4] webhook payload content
+#### Pull Request Events
 
-| Action-managed Variables | Available as              |
-| ------------------------ | ------------------------- |
-| github.event.ref         | GITHUB_EVENT_REF_SLUG     |
-| github.event.ref         | GITHUB_EVENT_REF_SLUG_URL |
+Applies to: `pull_request`, `pull_request_review`, `pull_request_review_comment`, and `pull_request_target`
 
-#### pull_request
+Reference: [Pull Request webhook payload][5]
 
-Checkout [pull_request][5] webhook payload content
+| Event Variable                     | Enhanced Format                            |
+| ---------------------------------- | ------------------------------------------ |
+| github.event.pull_request.head.sha | `GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT` |
 
-| Action-managed Variables           | Available as                             |
-| ---------------------------------- | ---------------------------------------- |
-| github.event.pull_request.head.sha | GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT |
+Example:
 
-#### pull_request_review
-
-Checkout [pull_request_review][6] webhook payload content
-
-| Action-managed Variables           | Available as                             |
-| ---------------------------------- | ---------------------------------------- |
-| github.event.pull_request.head.sha | GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT |
-
-#### pull_request_review_comment
-
-Checkout [pull_request_review_comment][7] webhook payload content
-
-| Action-managed Variables           | Available as                             |
-| ---------------------------------- | ---------------------------------------- |
-| github.event.pull_request.head.sha | GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT |
-
-#### pull_request_target
-
-Checkout [pull_request][5] webhook payload content
-
-| Action-managed Variables           | Available as                             |
-| ---------------------------------- | ---------------------------------------- |
-| github.event.pull_request.head.sha | GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT |
+```yaml
+# Original SHA: 8f166fd75f36c896c63a9a0c0ccd2b42f5b0c040
+${{ env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT }} # 8f166fd7
+```
 
 [1]: https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables
 [2]: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 [3]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#create
 [4]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#delete
 [5]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#pull_request
-[6]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#pull_request_review
-[7]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads#pull_request_review_comment

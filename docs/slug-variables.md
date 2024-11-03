@@ -1,105 +1,77 @@
-# Slug Variables
+# Slug Variables Reference
 
-## Table of Contents
+This document details the slug-formatted variables provided by GitHub Slug Action, which convert GitHub variables into URL and path-safe formats.
 
-- [Slug Variables](#slug-variables)
-  - [Table of Contents](#table-of-contents)
-  - [GITHUB_REPOSITORY_SLUG](#github_repository_slug)
-  - [GITHUB_REPOSITORY_OWNER_PART_SLUG](#github_repository_owner_part_slug)
-  - [GITHUB_REPOSITORY_NAME_PART_SLUG](#github_repository_name_part_slug)
-  - [GITHUB_REF_SLUG](#github_ref_slug)
-  - [GITHUB_HEAD_REF_SLUG](#github_head_ref_slug)
-  - [GITHUB_BASE_REF_SLUG](#github_base_ref_slug)
-  - [GITHUB_EVENT_REF_SLUG](#github_event_ref_slug)
+## Available Slug Variables
 
-## GITHUB_REPOSITORY_SLUG
+### Repository Variables
 
-Slug the environment variable **GITHUB_REPOSITORY**
+#### GITHUB_REPOSITORY_SLUG
 
-The owner and repository name.
+Slugified version of `GITHUB_REPOSITORY` (owner/repository)
 
-| GITHUB_REPOSITORY            | GITHUB_REPOSITORY_SLUG       |
-| ---------------------------- | ---------------------------- |
-| octocat/Hello-World          | octocat-hello-world          |
-| rlespinasse/Hello-World.go   | rlespinasse-hello-world.go   |
-| AnotherPerson/SomeRepository | anotherperson-somerepository |
+```yaml
+# Examples
+GITHUB_REPOSITORY: "octocat/Hello-World" → GITHUB_REPOSITORY_SLUG: "octocat-hello-world"
+GITHUB_REPOSITORY: "rlespinasse/Hello-World.go" → GITHUB_REPOSITORY_SLUG: "rlespinasse-hello-world.go"
+```
 
-## GITHUB_REPOSITORY_OWNER_PART_SLUG
+#### Repository Parts
 
-Slug the environment variable [GITHUB_REPOSITORY_OWNER_PART](partial-variables.md#github_repository_owner_part)
+- **GITHUB_REPOSITORY_OWNER_PART_SLUG**: Owner name in slug format
+- **GITHUB_REPOSITORY_NAME_PART_SLUG**: Repository name in slug format
 
-The Owner part of **GITHUB_REPOSITORY** variable.
+```yaml
+# Example
+GITHUB_REPOSITORY: "AnotherPerson/SomeRepository"
+GITHUB_REPOSITORY_OWNER_PART_SLUG: "anotherperson"
+GITHUB_REPOSITORY_NAME_PART_SLUG: "somerepository"
+```
 
-| GITHUB_REPOSITORY_OWNER_PART | GITHUB_REPOSITORY_OWNER_PART_SLUG |
-| ---------------------------- | --------------------------------- |
-| octocat                      | octocat                           |
-| rlespinasse                  | rlespinasse                       |
-| AnotherPerson                | anotherperson                     |
+### Reference Variables
 
-## GITHUB_REPOSITORY_NAME_PART_SLUG
+#### GITHUB_REF_SLUG
 
-Slug the environment variable [GITHUB_REPOSITORY_NAME_PART](partial-variables.md#github_repository_name_part)
+Slugified branch or tag reference that triggered the workflow
 
-The Repository name part of **GITHUB_REPOSITORY** variable.
+```yaml
+# Examples
+GITHUB_REF: "refs/heads/feat/new_feature" → GITHUB_REF_SLUG: "feat-new-feature"
+GITHUB_REF: "refs/tags/product@1.0.0-rc.2" → GITHUB_REF_SLUG: "product-1.0.0-rc.2"
+```
 
-| GITHUB_REPOSITORY_NAME_PART | GITHUB_REPOSITORY_NAME_PART_SLUG |
-| --------------------------- | -------------------------------- |
-| Hello-World                 | hello-world                      |
-| Hello-World.go              | hello-world.go                   |
-| SomeRepository              | somerepository                   |
+#### Pull Request References
 
-## GITHUB_REF_SLUG
+Available during pull request events:
 
-Slug the environment variable **GITHUB_REF**
+- **GITHUB_HEAD_REF_SLUG**: Source branch in slug format
+- **GITHUB_BASE_REF_SLUG**: Target branch in slug format
 
-The branch or tag ref that triggered the workflow.
-_If neither a branch or tag is available for the event type, the variable will not exist._
+```yaml
+# Example
+GITHUB_HEAD_REF: "feat/new_feature" → GITHUB_HEAD_REF_SLUG: "feat-new-feature"
+GITHUB_BASE_REF: "main" → GITHUB_BASE_REF_SLUG: "main"
+```
 
-| GITHUB_REF                     | GITHUB_REF_SLUG     |
-| ------------------------------ | ------------------- |
-| refs/heads/main                | main                |
-| refs/heads/feat/new_feature    | feat-new-feature    |
-| refs/tags/v1.0.0               | v1.0.0              |
-| refs/tags/product@1.0.0-rc.2   | product-1.0.0-rc.2  |
-| refs/heads/New_Awesome_Product | new-awesome-product |
+#### GITHUB_EVENT_REF_SLUG
 
-## GITHUB_HEAD_REF_SLUG
+Available during `create` and `delete` events, provides the slugified reference name
 
-Slug the environment variable **GITHUB_HEAD_REF**
+```yaml
+# Example
+github.event.ref: "refs/heads/New_Awesome_Product" → GITHUB_EVENT_REF_SLUG: "new-awesome-product"
+```
 
-The branch of the head repository.
-_Only set for [`pull-request`][1] event and forked repositories._
+## Slugification Rules
 
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG |
-| ------------------------------ | -------------------- |
-| refs/heads/main                | main                 |
-| refs/heads/feat/new_feature    | feat-new-feature     |
-| refs/heads/New_Awesome_Product | new-awesome-product  |
+- Converts to lowercase
+- Replaces spaces and special characters with hyphens
+- Preserves dots and version numbers
+- Removes leading/trailing special characters
 
-## GITHUB_BASE_REF_SLUG
+For URL-safe versions of these variables, append `_URL` to access percent-encoded formats.
 
-Slug the environment variable **GITHUB_BASE_REF**
+## Related Documentation
 
-The branch of the base repository.
-_Only set for [`pull-request`][1] event and forked repositories._
-
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG |
-| ------------------------------ | -------------------- |
-| refs/heads/main                | main                 |
-| refs/heads/feat/new_feature    | feat-new-feature     |
-| refs/heads/New_Awesome_Product | new-awesome-product  |
-
-## GITHUB_EVENT_REF_SLUG
-
-Slug the variable **github.event.ref**
-
-The git reference resource associated to triggered webhook.
-_Only set for [`create`, and `delete`][1] events._
-
-| GITHUB_REF                     | GITHUB_HEAD_REF_SLUG |
-| ------------------------------ | -------------------- |
-| refs/heads/main                | main                 |
-| refs/heads/feat/new_feature    | feat-new-feature     |
-| refs/heads/New_Awesome_Product | new-awesome-product  |
-
-[1]: https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads
+- [GitHub Events Documentation](https://docs.github.com/en/developers/webhooks-and-events/webhook-events-and-payloads)
+- [Partial Variables Reference](partial-variables.md)

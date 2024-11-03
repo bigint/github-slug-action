@@ -1,20 +1,30 @@
-name: URL use
+name: URL Usage Examples
 
 on: push
 
 jobs:
-  as_subdomain:
+  deploy_to_subdomain:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: rlespinasse/github-slug-action@v5
-      - run: |
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate URL-safe slugs
+        uses: rlespinasse/github-slug-action@v5
+
+      - name: Deploy to subdomain environment
+        run: |
           ./deploy-application.sh --url "https://${{ env.GITHUB_REF_SLUG_URL }}.staging.app.example.com"
 
-  as_resource_path:
+  deploy_to_path:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: rlespinasse/github-slug-action@v5
-      - run: |
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate URL-safe slugs
+        uses: rlespinasse/github-slug-action@v5
+
+      - name: Deploy to path-based environment
+        run: |
           ./deploy-application.sh --url "https://staging.app.example.com/${{ env.GITHUB_REF_SLUG_URL }}"
