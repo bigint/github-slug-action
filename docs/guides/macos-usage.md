@@ -48,6 +48,7 @@ steps:
       xcodebuild -scheme "MyApp" \
         -configuration Release \
         -derivedDataPath "build/${GITHUB_REF_SLUG}"
+    shell: bash
 ```
 
 ## Best Practices

@@ -30,6 +30,7 @@ steps:
   - uses: rlespinasse/github-slug-action@v5
   - run: |
       echo "Deploying commit ${{ env.GITHUB_SHA_SHORT }}"
+    shell: bash
 ```
 
 ## Common Use Cases

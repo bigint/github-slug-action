@@ -13,6 +13,7 @@ steps:
       echo "Branch Name: ${{ env.GITHUB_REF_NAME }}"
       echo "Branch Ref: ${{ env.GITHUB_REF_SLUG }}"
       echo "SHA: ${{ env.GITHUB_SHA_SHORT }}"
+    shell: bash
 ```
 
 ## 📖 Table of Contents

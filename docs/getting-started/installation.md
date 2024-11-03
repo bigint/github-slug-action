@@ -57,11 +57,13 @@ steps:
 Add this step after installation to verify:
 
 ```yaml
-- name: Verify Installation
-  shell: bash
-  run: |
-    echo "GITHUB_REPOSITORY_SLUG: ${{ env.GITHUB_REPOSITORY_SLUG }}"
-    echo "GITHUB_REF_SLUG: ${{ env.GITHUB_REF_SLUG }}"
+steps:
+  - name: Verify Installation
+    shell: bash
+    run: |
+      echo "GITHUB_REPOSITORY_SLUG: ${{ env.GITHUB_REPOSITORY_SLUG }}"
+      echo "GITHUB_REF_SLUG: ${{ env.GITHUB_REF_SLUG }}"
+    shell: bash
 ```
 
 ## Next Steps

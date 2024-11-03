@@ -23,6 +23,7 @@ steps:
   - name: Build
     run: |
       docker build -t ${{ env.GITHUB_REPOSITORY_SLUG }}:latest .
+    shell: bash
 ```
 
 ### Deployment Paths
@@ -34,6 +35,7 @@ steps:
   - name: Deploy
     run: |
       deploy --path="/${{ env.GITHUB_REPOSITORY_OWNER_SLUG }}/${{ env.GITHUB_REPOSITORY_NAME_SLUG }}"
+    shell: bash
 ```
 
 ### URL Generation
@@ -45,6 +47,7 @@ steps:
   - name: Set URLs
     run: |
       echo "APP_URL=https://${{ env.GITHUB_REPOSITORY_SLUG }}.example.com" >> $GITHUB_ENV
+    shell: bash
 ```
 
 ## Transformation Rules

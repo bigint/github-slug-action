@@ -37,6 +37,7 @@ steps:
     run: |
       echo "Current branch: ${GITHUB_REF_SLUG}"
       echo "Working directory: ${GITHUB_WORKSPACE}/${GITHUB_REF_SLUG}"
+    shell: bash
 ```
 
 ### File Operations
@@ -47,6 +48,7 @@ steps:
   - run: |
       mkdir -p "build/${GITHUB_REF_SLUG}"
       touch "build/${GITHUB_REF_SLUG}/build.log"
+    shell: bash
 ```
 
 ## Best Practices

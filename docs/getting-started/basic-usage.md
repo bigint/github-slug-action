@@ -19,6 +19,7 @@ steps:
 
       # Short SHA
       echo ${{ env.GITHUB_SHA_SHORT }}
+    shell: bash
 ```
 
 ## Common Patterns
@@ -84,6 +85,7 @@ jobs:
       - name: Deploy
         run: |
           deploy --env="pr-${{ env.GITHUB_HEAD_REF_SLUG }}"
+        shell: bash
 ```
 
 ### Branch Deployments
@@ -100,6 +102,7 @@ jobs:
       - name: Deploy
         run: |
           deploy --env="${{ env.GITHUB_REF_SLUG }}"
+        shell: bash
 ```
 
 ## Best Practices

@@ -57,6 +57,7 @@ steps:
       echo "REF_SLUG: ${{ env.GITHUB_REF_SLUG }}"
       echo "SHA_SHORT: ${{ env.GITHUB_SHA_SHORT }}"
       env | grep GITHUB_
+    shell: bash
 ```
 
 ## Known Issues

@@ -14,6 +14,7 @@ steps:
   - name: Previous step setting variables
     run: |
       echo "GITHUB_REF_SLUG=custom-value" >> $GITHUB_ENV
+    shell: bash
 
   - uses: rlespinasse/github-slug-action@v5  # Will override previous values
 ```
@@ -25,6 +26,7 @@ steps:
 steps:
   - name: Step requiring slug variables
     run: echo ${{ env.GITHUB_REF_SLUG }}  # Will be empty if placed before the action
+    shell: bash
 
   - uses: rlespinasse/github-slug-action@v5
 ```
@@ -38,6 +40,7 @@ steps:
   - name: Previous step setting variables
     run: |
       echo "GITHUB_REF_SLUG=custom-value" >> $GITHUB_ENV
+    shell: bash
 
   - uses: rlespinasse/github-slug-action@v5
     with:
@@ -45,6 +48,7 @@ steps:
 
   - name: Step requiring slug variables
     run: echo ${{ env.CUSTOM_GITHUB_REF_SLUG }}  # Will be empty if placed before the action
+    shell: bash
 ```
 
 ### Variable Preservation
@@ -53,6 +57,7 @@ steps:
 steps:
   - name: Save original value
     run: echo "ORIGINAL_REF=${{ env.GITHUB_REF_SLUG }}" >> $GITHUB_ENV
+    shell: bash
 
   - uses: rlespinasse/github-slug-action@v5
 ```
@@ -65,6 +70,7 @@ steps:
   - name: Use custom variables
     run: |
       echo "CUSTOM_SLUG=${GITHUB_REF_SLUG}" >> $GITHUB_ENV
+    shell: bash
 ```
 
 ## Best Practices

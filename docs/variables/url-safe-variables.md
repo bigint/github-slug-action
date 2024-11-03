@@ -32,6 +32,7 @@ steps:
   - uses: rlespinasse/github-slug-action@v5
   - run: |
       echo "DEPLOY_URL=https://${{ env.GITHUB_ACTOR_URL_SAFE }}.example.com" >> $GITHUB_ENV
+    shell: bash
 ```
 
 ### File Path Creation
@@ -42,6 +43,7 @@ steps:
   - uses: rlespinasse/github-slug-action@v5
   - run: |
       mkdir -p "artifacts/${{ env.GITHUB_EVENT_NAME_URL_SAFE }}"
+    shell: bash
 ```
 
 ## Common Use Cases

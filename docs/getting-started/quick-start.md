@@ -22,6 +22,7 @@ jobs:
           echo "Repository: ${{ env.GITHUB_REPOSITORY_SLUG }}"
           echo "Branch: ${{ env.GITHUB_REF_SLUG }}"
           echo "SHA: ${{ env.GITHUB_SHA_SHORT }}"
+        shell: bash
 ```
 
 ## Key Features
