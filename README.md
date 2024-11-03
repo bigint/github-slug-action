@@ -1,116 +1,97 @@
 # GitHub Slug Action
 
-A powerful GitHub Action that exposes slug/short versions of GitHub environment variables for enhanced workflow management.
+Generate slug and url-safe variables for your GitHub Actions workflows based on GitHub environment variables.
 
-## Features
-
-- Converts environment variables to slug format (lowercase, URL-friendly)
-- Provides URL-safe versions of variables
-- Generates shortened versions of commit SHAs
-- Maintains case-sensitive options
-- Supports custom prefixes and length configurations
-
-## Quick Start
+## 🚀 Quick Start
 
 ```yaml
-- name: Enhanced GitHub environment variables
-  uses: rlespinasse/github-slug-action@v5
+steps:
+  - uses: rlespinasse/github-slug-action@v5
+  - name: Print slug variables
+    run: |
+      echo "Repository: ${{ env.GITHUB_REPOSITORY_SLUG }}"
+      echo "Branch Name: ${{ env.GITHUB_REF_NAME }}"
+      echo "Branch Ref: ${{ env.GITHUB_REF_SLUG }}"
+      echo "SHA: ${{ env.GITHUB_SHA_SHORT }}"
 ```
 
-## Configuration Options
+## 📖 Table of Contents
 
-### Basic Usage
+- [GitHub Slug Action](#github-slug-action)
+  - [🚀 Quick Start](#-quick-start)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [✨ Features](#-features)
+  - [🔧 Usage](#-usage)
+  - [📋 Available Variables](#-available-variables)
+  - [💡 Examples](#-examples)
+    - [Branch Deployment](#branch-deployment)
+  - [📚 Documentation](#-documentation)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+
+## ✨ Features
+
+- Generates clean, URL-safe slugs from GitHub variables
+- Supports Windows and Linux runners
+- Provides multiple variable formats:
+  - Standard slugs
+  - URL-safe slugs
+  - Short SHA versions
+- Zero configuration required
+- Lightweight and fast execution
+
+## 🔧 Usage
+
+1. Add the action to your workflow
+2. Access generated variables in subsequent steps
+3. Use in conditions, environment names, or deployment URLs
+
+See our [Getting Started Guide](docs/getting-started/quick-start.md) for detailed instructions.
+
+## 📋 Available Variables
+
+| Category   | Original            | Generated Slug           | URL-Safe                     |
+| ---------- | ------------------- | ------------------------ | ---------------------------- |
+| Repository | `GITHUB_REPOSITORY` | `GITHUB_REPOSITORY_SLUG` | `GITHUB_REPOSITORY_SLUG_URL` |
+| Branch/Tag | `GITHUB_REF`        | `GITHUB_REF_SLUG`        | `GITHUB_REF_SLUG_URL`        |
+| SHA        | `GITHUB_SHA`        | `GITHUB_SHA_SHORT`       | -                            |
+
+[View all available variables →](docs/variables/overview.md)
+
+## 💡 Examples
+
+### Branch Deployment
 
 ```yaml
-- name: Enhanced GitHub environment variables
-  uses: rlespinasse/github-slug-action@v5
+name: Deploy
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rlespinasse/github-slug-action@v5
+      - run: echo "Deploying to ${{ env.GITHUB_REF_SLUG }}"
 ```
 
-### With Custom Prefix
+[More examples →](docs/guides/)
 
-```yaml
-- name: Enhanced GitHub environment variables
-  uses: rlespinasse/github-slug-action@v5
-  with:
-    prefix: CI_
-```
+## 📚 Documentation
 
-### With Custom Slug Length
+- [Getting Started](docs/getting-started/)
+- [Variable Reference](docs/variables/)
+- [Usage Guides](docs/guides/)
+- [Troubleshooting](docs/reference/troubleshooting.md)
 
-```yaml
-- name: Enhanced GitHub environment variables
-  uses: rlespinasse/github-slug-action@v5
-  with:
-    slug-maxlength: 80  # Use 'nolimit' for unlimited length (Default: 63)
-```
+## 🤝 Contributing
 
-### With Custom Short Length
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
-```yaml
-- name: Enhanced GitHub environment variables
-  uses: rlespinasse/github-slug-action@v5
-  with:
-    short-length: 7  # Default: Git-determined, use 8 for v3.x compatibility
-```
-
-## Available Variables
-
-### Enhanced Variables
-
-- `GITHUB_REF_NAME`: Reference name (branch/tag)
-
-### Partial Variables
-
-- `GITHUB_REPOSITORY_OWNER_PART`
-- `GITHUB_REPOSITORY_NAME_PART`
-
-### Slug Variables
-
-- `GITHUB_REPOSITORY_SLUG`
-- `GITHUB_REF_SLUG`
-- `GITHUB_HEAD_REF_SLUG`
-- And more...
-
-### Short Variables
-
-- `GITHUB_SHA_SHORT`
-- `GITHUB_EVENT_PULL_REQUEST_HEAD_SHA_SHORT`
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Short Variable Length Changes**
-   - Use `short-length` input to maintain consistent lengths
-   - Minimum length: 4 characters
-
-2. **Environment Variable Conflicts**
-   - Use prefix to avoid conflicts with GitHub defaults
-   - Check [known conflicts documentation](docs/conflicts.md)
-
-### Best Practices
-
-- Use [Dependabot](https://docs.github.com/en/code-security/dependabot) to keep the action updated
-- Always specify version tags (e.g., `@v5`) instead of branch names
-- Test variables in your specific workflow context
-
-## Documentation
-
-Detailed documentation available for:
-
-- [Slug Variables](docs/slug-variables.md)
-- [URL Variables](docs/slug-url-variables.md)
-- [Short Variables](docs/short-variables.md)
-- [GitHub Variables](docs/github-variables.md)
-
-## Contributing
-
-Issues and pull requests are welcome! Please check our [contribution guidelines](CONTRIBUTING.md).
-
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-For detailed examples and advanced usage, visit our [GitHub repository](https://github.com/rlespinasse/github-slug-action).
+⭐ If this action helps you, please consider giving it a star!
+
+[Report Bug](https://github.com/rlespinasse/github-slug-action/issues) · [Request Feature](https://github.com/rlespinasse/github-slug-action/issues)
