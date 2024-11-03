@@ -1,30 +1,47 @@
-# How to contribute to GitHub Slug Action
+# Contributing to GitHub Slug Action
 
-## Did you find a bug
+Thank you for your interest in contributing to GitHub Slug Action! Here's how you can help.
 
-* **Do not open up a GitHub issue if the bug is a security vulnerability**, and instead to refer to our [security policy][1].
+## Reporting Bugs
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues][2].
+1. **Security Vulnerabilities**: Do not open a GitHub issue for security vulnerabilities. Please refer to our [security policy][1].
 
-* If you're unable to find an open issue addressing the problem, [open a 'Bug' issue][4].
-Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+2. **Check Existing Issues**: Before creating a new issue, please [search the existing issues][2] to avoid duplicates.
 
-## Did you write a patch that fixes a bug
+3. **Submit Bug Reports**: If you find a new bug, [create a 'Bug' issue][4] including:
+   - A clear, descriptive title
+   - Detailed description of the problem
+   - Steps to reproduce the issue
+   - Code samples or test cases demonstrating the expected behavior
+   - Any relevant screenshots or error messages
 
-* Open a new GitHub pull request with the patch.
+## Submitting Changes
 
-* Ensure the PR description clearly describes the problem and solution.
-Include the relevant issue number if applicable.
+1. **Bug Fixes**:
+   - Fork the repository and create a new branch
+   - Open a Pull Request with your patch
+   - Clearly describe the problem and solution in the PR description
+   - Reference any related issues using the issue number (#123)
 
-## Do you intend to add a new feature or change an existing one
+2. **New Features**:
+   - Before writing code, [open a 'Feature request' issue][5]
+   - Discuss the proposed changes with the maintainers
+   - Implement the feature only after receiving approval
 
-* Suggest your change by [opening a 'Feature request' issue][5]
+## Code Quality Guidelines
 
-## Do you have questions about the source code
+- Follow the existing code style and conventions
+- Include appropriate tests for new features
+- Ensure all tests pass before submitting
+- Update documentation as needed
 
-* [open an issue][3] with your question.
+## Questions and Support
 
-Thanks!
+- For general questions about the project, [open an issue][3]
+- Be specific and provide context in your questions
+- Check existing issues and documentation before asking
+
+Thank you for contributing to GitHub Slug Action!
 
 [1]: https://github.com/rlespinasse/github-slug-action/security/policy
 [2]: https://github.com/rlespinasse/github-slug-action/issues
