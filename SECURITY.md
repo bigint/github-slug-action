@@ -11,17 +11,20 @@
 | 1.x     | :x:                | 2021-04-05     |        | v1.1.x, 1.2.0 |
 | 1.0.x   | :x:                | 2019-11-07     |        | 1.0.2         |
 
-A GitHub repository can use one of the available branches as an action inside its workflows.
+GitHub workflows can use any available branch as an action.
 
-### End of Life of a branch
+## Branch End-of-Life Policy
 
-Since `2023-10-20`, when a new major version is released,
+Since `2023-10-20`, when a new major version is released:
 
-- The previous one will continue to receive security patches for 3 months,
-- After the 3 months, the branch is deleted, and only the tags remain.
+- The previous version continues to receive security patches for 3 months
+- After these 3 months, the branch is deleted and only tags are retained
 
-## Reporting a Vulnerability
+## Vulnerability Reporting
 
-In this project, you can report a Vulnerability by creating a [draft security advisory](https://github.com/rlespinasse/github-slug-action/security/advisories).
+To report a vulnerability, please create a [draft security advisory](https://github.com/rlespinasse/github-slug-action/security/advisories).
 
-If the vulnerability is confirmed, a fix will be produced and the advisory will be published.
+If the vulnerability is confirmed:
+
+- A fix will be developed
+- The security advisory will be published
