@@ -76,4 +76,4 @@ steps:
 - [Branch Variables](branch-variables.md)
 - [Event Variables](event-variables.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

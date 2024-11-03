@@ -72,4 +72,4 @@ preview_url: https://pr-${{ env.GITHUB_HEAD_REF_SLUG }}.dev.com
 - [Advanced Patterns](../guides/advanced-patterns.md)
 - [Troubleshooting](../reference/troubleshooting.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

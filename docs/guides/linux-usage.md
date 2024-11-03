@@ -71,4 +71,4 @@ steps:
 - [URL Usage](url-usage.md)
 - [Version Variables](version-variables.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

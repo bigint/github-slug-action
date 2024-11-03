@@ -92,4 +92,4 @@ steps:
 - [Documentation](https://github.com/rlespinasse/github-slug-action/blob/main/README.md)
 - [Release Notes](https://github.com/rlespinasse/github-slug-action/releases)
 
-Need more help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need more help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

@@ -94,4 +94,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ If this action helps you, please consider giving it a star!
 
-[Report Bug](https://github.com/rlespinasse/github-slug-action/issues) · [Request Feature](https://github.com/rlespinasse/github-slug-action/issues)
+[Report Bug](https://github.com/rlespinasse/github-slug-action/issues/new) · [Request Feature](https://github.com/rlespinasse/github-slug-action/issues/new)

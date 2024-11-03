@@ -64,4 +64,4 @@ steps:
 - [Reference Variables](reference-variables.md)
 - [Branch Variables](branch-variables.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

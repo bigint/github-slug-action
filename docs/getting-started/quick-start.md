@@ -45,4 +45,4 @@ jobs:
 2. See [usage examples](../guides/common-patterns.md)
 3. Review [best practices](../guides/best-practices.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

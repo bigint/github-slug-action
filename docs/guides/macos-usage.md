@@ -72,4 +72,4 @@ steps:
 - [Windows Usage](windows-usage.md)
 - [URL Usage](url-usage.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

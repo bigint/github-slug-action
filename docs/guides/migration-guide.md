@@ -75,4 +75,4 @@ This guide helps you migrate between different versions of the GitHub Slug Actio
 - [URL-Safe Variables](url-safe-variables.md)
 - [Short SHA Variables](short-sha-variables.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

@@ -115,4 +115,4 @@ jobs:
 - [Advanced Usage](../guides/advanced-usage.md)
 - [Troubleshooting](../reference/troubleshooting.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

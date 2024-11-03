@@ -79,4 +79,4 @@ If you encounter issues:
 3. Ensure proper permissions
 4. Review [Troubleshooting Guide](../reference/troubleshooting.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

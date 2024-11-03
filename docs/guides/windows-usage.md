@@ -74,4 +74,4 @@ steps:
 - [Version Variables](version-variables.md)
 - [Migration Guide](migration-guide.md)
 
-Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues)
+Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)
