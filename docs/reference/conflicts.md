@@ -91,8 +91,7 @@ steps:
 
 ## Related Documentation
 
-- [GitHub Variables](reference/github-variables.md)
-- [Migration Guide](reference/migration-guide.md)
-- [Troubleshooting](reference/troubleshooting.md)
+- [Migration Guide](../guides/migration-guide.md)
+- [Troubleshooting](troubleshooting.md)
 
 Need help? [Open an issue](https://github.com/rlespinasse/github-slug-action/issues/new)

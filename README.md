@@ -72,6 +72,7 @@ jobs:
     steps:
       - uses: rlespinasse/github-slug-action@v5
       - run: echo "Deploying to ${{ env.GITHUB_REF_SLUG }}"
+        shell: bash
 ```
 
 [More examples →](docs/guides/)
