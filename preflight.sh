@@ -36,3 +36,12 @@ if [ -f "$GITHUB_OUTPUT" ]; then
 else
   echo "::set-output name=PREFLIGHT_SHORT_LENGTH::${PREFLIGHT_SHORT_LENGTH}"
 fi
+
+# Check for existing GITHUB_* variables using the env command
+existing_github_vars=$(env | grep '^GITHUB_')
+
+# Print a warning if any existing GITHUB_* variables are found
+if [ -n "$existing_github_vars" ]; then
+  echo "::warning ::The following GITHUB_* variables already exist and may be overwritten:"
+  echo "$existing_github_vars"
+fi

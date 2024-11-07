@@ -25,6 +25,8 @@ runs:
       env:
         INPUT_SLUG_MAXLENGTH: ${{ inputs.slug-maxlength }}
         INPUT_SHORT_LENGTH: ${{ inputs.short-length }}
+      outputs:
+        warnings: ${{ steps.prefligth.outputs.warnings }}
 
     # From Environment Variables
     - uses: rlespinasse/slugify-value@v1.4.0
@@ -118,3 +120,7 @@ runs:
         short-on-error: true
         length: ${{ steps.prefligth.outputs.PREFLIGHT_SHORT_LENGTH }}
         prefix: ${{ inputs.prefix }}
+
+    # Print warnings captured from preflight.sh
+    - name: Print warnings
+      run: echo "${{ steps.prefligth.outputs.warnings }}"
